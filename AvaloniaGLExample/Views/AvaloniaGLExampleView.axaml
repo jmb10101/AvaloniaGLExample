@@ -1,0 +1,33 @@
+<reactiveui:ReactiveUserControl
+    xmlns="https://github.com/avaloniaui"
+    x:TypeArguments="vm:AvaloniaGLExampleViewModel"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:AvaloniaGLExample.ViewModels"
+    xmlns:reactiveui="http://reactiveui.net"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+    x:Class="AvaloniaGLExample.Views.AvaloniaGLExampleView"
+    xmlns:graphics="clr-namespace:AvaloniaGLExample.Graphics">
+	<Grid
+        x:Name="ViewportContainer"
+        Grid.Column="2">
+	    <graphics:OpenGlViewport
+		    x:Name="ViewportCtrl"
+		    ZIndex="0"
+		    TargetFps="60"
+		    HorizontalAlignment="Center"
+		    VerticalAlignment="Center"
+		    Width="256"
+		    Height="256"/>
+	    <Canvas
+		    x:Name="ViewportOverlay"
+		    Background="Transparent"
+		    ZIndex="1">
+		    <TextBlock
+			    x:Name="DiagnosticsLabelCtrl"
+			    Margin="4"
+			    Text="----"/>
+	    </Canvas>
+	</Grid>
+</reactiveui:ReactiveUserControl>
