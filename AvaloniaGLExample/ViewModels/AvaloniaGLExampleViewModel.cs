@@ -18,8 +18,8 @@ public class AvaloniaGLExampleViewModel : ReactiveObject
 
     public AvaloniaGLExampleViewModel()
     {
-        this.Camera.Position = new Vector3(-5, -5,5);
-        this.Camera.LookTarget = new Vector3(5, 0, -5);
+        this.Camera.Position = new Vector3(-2, -2,2);
+        this.Camera.LookTarget = new Vector3(0, 0, 0);
     }
     
     public string Diagnostics

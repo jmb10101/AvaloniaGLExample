@@ -165,11 +165,10 @@ public partial class AvaloniaGLExampleView : ReactiveUserControl<AvaloniaGLExamp
         this.Viewport.InitAsObservable
             .Subscribe(args=>
             {
-                var gl = args.gl;
                 GL.Enable(EnableCap.Blend);
                 GL.Enable(EnableCap.DepthTest);
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-                gl.ClearColor(0.06f, 0.06f, 0.06f, 1.0f);
+                GL.ClearColor(0.06f, 0.06f, 0.06f, 1.0f);
         
                 this.vertexBufferObject = GL.GenBuffer();
                 GL.BindBuffer(BufferTarget.ArrayBuffer, this.vertexBufferObject);
@@ -234,30 +233,10 @@ public partial class AvaloniaGLExampleView : ReactiveUserControl<AvaloniaGLExamp
                 this.shader?.Use();
                 this.shader?.SetMatrix4("view", this.ViewModel!.Camera.ViewTransform);
                 this.shader?.SetMatrix4("projection", this.ViewModel!.Camera.ProjectionTransform);
-
-                var heat = (float)(Math.Sin(this.Viewport.Time.TotalSeconds) + 1) / 2;
-                
-
-                for (int x = 0; x < 10; x++)
-                {
-                    for (int z = 0; z < 10; z++)
-                    {
-                        var modelTransform = Matrix4.Identity;
-                        modelTransform *= Matrix4.CreateTranslation(x, 0, -z);
-                        this.shader?.SetMatrix4("model", modelTransform);
-                        //this.shader?.SetFloat("vertColorSaturation", 0f);
-                        //this.shader?.SetFloat("textureOpacity", 1f);
-                        this.texture0?.Use(TextureUnit.Texture0);
-                        this.texture1?.Use(TextureUnit.Texture1);
-                        GL.DrawArrays(PrimitiveType.Triangles, 0, 36);
-                    
-                        // this.shader?.SetMatrix4("model", modelTransform * Matrix4.CreateScale(1.001f, 1.001f, 1.001f));
-                        // this.shader?.SetFloat("vertColorSaturation", heat * 0.6f);
-                        // this.shader?.SetFloat("textureOpacity", 0.5f);
-                        // this.texture1?.Use(TextureUnit.Texture0);
-                        // GL.DrawArrays(PrimitiveType.Triangles, 0, 36);
-                    }
-                }
+                this.shader?.SetMatrix4("model", Matrix4.Identity);
+                this.texture0?.Use(TextureUnit.Texture0);
+                this.texture1?.Use(TextureUnit.Texture1);
+                GL.DrawArrays(PrimitiveType.Triangles, 0, 36);
                 
                 // Avalonia requires active texture0.
                 GL.ActiveTexture(TextureUnit.Texture0);
